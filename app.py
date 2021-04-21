@@ -2,6 +2,7 @@ from bottle import route, run, request, get, post
 import feedparser
 import random
 import os
+import spacy
 
 @get('/test')
 def get_test():
@@ -39,7 +40,29 @@ def get_news_article():
     # TODO: Check articles until one passes the test for a certain topic, then return that article
     cnnRss = feedparser.parse("http://rss.cnn.com/rss/edition.rss")
     cnnEntries = cnnRss["entries"] # title, summary, link, published
-    myData = cnnEntries[:1]
+    bbcRss = feedparser.parse("http://feeds.bbci.co.uk/news/rss.xml")
+    bbcEntries = bbcRss["entries"] # title, summary, link, published
+    abcRss = feedparser.parse("https://www.abc.net.au/news/feed/45910/rss.xml")
+    abcEntries = abcRss["entries"] # title, summary, link, published
+    nytimesRss = feedparser.parse("https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml")
+    nytimesEntries = nytimesRss["entries"] # title, summary, link, published
+    foxnewsRss = feedparser.parse("http://feeds.foxnews.com/foxnews/latest")
+    foxnewsEntries = foxnewsRss["entries"] # title, summary, link, published
+    nlp = spacy.load("training/model-best")
+    entries = cnnEntries + bbcEntries + abcEntries + nytimesEntries + foxnewsEntries
+    myData = []
+    print(len(entries))
+    while len(myData) == 0:
+        for entry in entries:
+            test = nlp(entry['title'])
+            if test.cats['RELEVANT'] > 0.95:
+                print(test.text)
+                print(test.cats['RELEVANT'])
+                print(test.cats['IRRELEVANT'])
+                myData.append(entry)
+                if len(myData) == 5:
+                    break
+            print(f"The article has a relevant score of {test.cats['RELEVANT']}")
     return {"data":myData}
 
 @get('/training/sports/<title>/<relevant>')
