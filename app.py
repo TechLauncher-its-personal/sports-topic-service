@@ -76,7 +76,7 @@ def get_training(title, relevant):
     cur = conn.cursor()
     sql = """INSERT INTO sports(title, relevant)
              VALUES(%s);"""
-    cur.execute(sql,(title,relevant))
+    cur.execute(sql,"(title,relevant)")
     conn.commit()
     cur.close()
     conn.close()
