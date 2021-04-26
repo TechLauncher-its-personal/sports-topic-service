@@ -74,9 +74,9 @@ def get_training(title, relevant):
     DATABASE_URL = os.environ['DATABASE_URL']
     conn = psycopg2.connect(DATABASE_URL)
     cur = conn.cursor()
-    sql = """INSERT INTO sports(title, relevant)
-             VALUES(%s);"""
-    cur.execute(sql,"(title,relevant)")
+    sql = f"""INSERT INTO sports(title, relevant)
+             VALUES({title, relevant});"""
+    cur.execute(sql)
     conn.commit()
     cur.close()
     conn.close()
