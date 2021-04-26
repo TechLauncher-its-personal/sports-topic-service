@@ -70,6 +70,7 @@ def get_news_article():
 @get('/training/sports/<title>/<relevant>')
 def get_training(title, relevant):
     # TODO: Add article to training data
+    print(os.environ)
     DATABASE_URL = os.environ['DATABASE_URL']
     conn = psycopg2.connect(DATABASE_URL)
     cur = conn.cursor()
