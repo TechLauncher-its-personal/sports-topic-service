@@ -53,18 +53,18 @@ def get_news_article():
     entries = cnnEntries + bbcEntries + abcEntries + nytimesEntries + foxnewsEntries
     random.shuffle(entries)
     myData = []
-    print(len(entries))
+    #print(len(entries))
     while len(myData) == 0:
         for entry in entries:
             test = nlp(entry['title'])
             if test.cats['RELEVANT'] > 0.95:
-                print(test.text)
-                print(test.cats['RELEVANT'])
-                print(test.cats['IRRELEVANT'])
+                #print(test.text)
+                #print(test.cats['RELEVANT'])
+                #print(test.cats['IRRELEVANT'])
                 myData.append(entry)
                 if len(myData) == 5:
                     break
-            print(f"The article has a relevant score of {test.cats['RELEVANT']}")
+            #print(f"The article has a relevant score of {test.cats['RELEVANT']}")
     return {"data":myData}
 
 @get('/training/sports/<title>/<relevant>')
