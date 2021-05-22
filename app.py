@@ -57,10 +57,10 @@ def get_news_article():
     while len(myData) == 0:
         for entry in entries:
             test = nlp(entry['title'])
-            if test.cats['RELEVANT'] > 0.95:
-                #print(test.text)
-                #print(test.cats['RELEVANT'])
-                #print(test.cats['IRRELEVANT'])
+            #print(test.text)
+            #print(test.cats['RELEVANT'])
+            #print(test.cats['IRRELEVANT'])
+            if test.cats['RELEVANT'] > 0.99:
                 myData.append(entry)
                 if len(myData) == 5:
                     break
