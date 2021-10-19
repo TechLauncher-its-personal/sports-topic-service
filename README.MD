@@ -96,17 +96,21 @@ heroku pg:psql
         relevant BOOL
     );
     ```
-    c. Get entries from the `sports` table by running the following command:
+    c. Check the details of the `sports` table by running the following command:
+    ```
+    \d sports;
+    ```
+    d. Get entries from the `sports` table by running the following command:
     ```
     SELECT * FROM sports;
     ```
     You must manually copy the entries to a new / existing `JSON` file that contains the dataset collected from running the training command.
 
-    d. Delete all entries from the `sports` table by running the following command:
+    e. Delete all entries from the `sports` table by running the following command:
     ```
     DELETE FROM sports;
     ```
-    e. Delete the `sports` table by running the following command:
+    f. Delete the `sports` table by running the following command:
     ```
     DELETE TABLE sports;
     ```
