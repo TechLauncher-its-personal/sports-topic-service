@@ -37,7 +37,7 @@ def get_random():
     DATABASE_URL = os.environ['DATABASE_URL']
     conn = psycopg2.connect(DATABASE_URL)
     cur = conn.cursor()
-    sql = ("SELECT * FROM sports")
+    sql = ("SELECT title FROM sports")
     cur.execute(sql)
     database = cur.fetchall()
     print(database)
