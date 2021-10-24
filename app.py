@@ -60,7 +60,7 @@ def get_news_article():
             #print(test.text)
             #print(test.cats['RELEVANT'])
             #print(test.cats['IRRELEVANT'])
-            if test.cats['RELEVANT'] > 0.99:
+            if test.cats['RELEVANT'] > 0.9:
                 myData.append(entry)
                 if len(myData) == 5:
                     break
