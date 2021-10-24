@@ -39,7 +39,7 @@ def get_random():
     cur = conn.cursor()
     sql = ("SELECT title FROM sports")
     cur.execute(sql)
-    database = cur.fetchall()
+    database = [row[0] for row in cur.fetchall()]
     print(database)
     conn.commit()
     cur.close()
