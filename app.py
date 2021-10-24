@@ -41,7 +41,7 @@ def get_random():
     cur.execute(sql)
     database = [row[0] for row in cur.fetchall()]
     print(database)
-    myData = {"title": database[0]}
+    myData = [{"title": database[0]}, {"title": "test"}]
     print(myData)
     print([article for article in myData if article["title"] not in database])
     conn.commit()
