@@ -34,6 +34,17 @@ def get_random():
     foxnewsRss = feedparser.parse("http://feeds.foxnews.com/foxnews/latest")
     foxnewsEntries = foxnewsRss["entries"] # title, summary, link, published
     myData = cnnEntries[:5] + bbcEntries[:5] + abcEntries[:5] + nytimesEntries[:5] + foxnewsEntries[:5]
+    DATABASE_URL = os.environ['DATABASE_URL']
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+    sql = ("SELECT * FROM sports")
+    cur.execute(sql)
+    database = cur.fetchall()
+    print(database)
+    conn.commit()
+    cur.close()
+    conn.close()
+    
     return {"data":random.choice(myData)}
 
 @get('/sports')
